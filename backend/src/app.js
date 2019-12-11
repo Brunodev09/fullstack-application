@@ -1,16 +1,17 @@
+const cluster = require("cluster");
 const express = require("express");
 const mongoose = require("mongoose");
-const { join } = require("path");
+const {join} = require("path");
 const logger = require("./tools/logger");
 const cors = require("cors");
 
 module.exports = class Server {
     constructor(controllers) {
         this.app = express();
-
         this.DB();
         this.initMiddlewares();
         this.initControllers(controllers);
+
     }
 
     listen() {
@@ -20,7 +21,7 @@ module.exports = class Server {
     initMiddlewares() {
         this.app.use(cors());
         this.app.use(express.json());
-        this.app.use(express.urlencoded({ extended: true }));
+        this.app.use(express.urlencoded({extended: true}));
     }
 
     initControllers(controllers) {
@@ -55,7 +56,7 @@ module.exports = class Server {
         });
 
         process.on("SIGINT", () => {
-            mongoose.connection.close(function() {
+            mongoose.connection.close(function () {
                 logger.info(
                     "Mongoose default connection disconnected through app termination"
                 );
@@ -63,4 +64,4 @@ module.exports = class Server {
             });
         });
     }
-}
+};
