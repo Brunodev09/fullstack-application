@@ -18,10 +18,9 @@ try {
         return;
     }
 
-
     const Server = require("./app");
-    const SubmitController = require("./controllers/submit");
-    const server = new Server([new SubmitController()]);
+    const AdminController = require("./controllers/admin");
+    const server = new Server([new AdminController()]);
     server.listen();
 
 } catch (e) {

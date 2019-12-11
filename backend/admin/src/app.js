@@ -4,8 +4,6 @@ const mongoose = require("mongoose");
 const {join} = require("path");
 const logger = require("./tools/logger");
 const cors = require("cors");
-const Ddos = require('ddos');
-let ddos = new Ddos({burst: 10, limit: 15});
 
 module.exports = class Server {
     constructor(controllers) {
@@ -17,11 +15,10 @@ module.exports = class Server {
     }
 
     listen() {
-        this.app.listen(process.env.PORT || 5000, () => logger.info(`Submit service has been started!`));
+        this.app.listen(process.env.PORT || 5001, () => logger.info(`Admin service has been started!`));
     }
 
     initMiddlewares() {
-        this.app.use(ddos.express);
         this.app.use(cors());
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended: true}));

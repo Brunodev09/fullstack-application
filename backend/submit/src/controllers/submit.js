@@ -13,6 +13,7 @@ module.exports = class UserController {
     constructor() {
         this.path = '/user';
         this.router = express.Router();
+
         this.init();
     }
 
@@ -24,8 +25,14 @@ module.exports = class UserController {
     create = async (req, res) => {
         try {
             const {name, songs} = req.body;
-            if (!name) return res.status(NOT_FOUND).json({error: "Missing nickname from request!"});
-            if (!songs || !songs.length) return res.status(NOT_FOUND).json({error: "Missing song list from request!"});
+            if (!name) {
+                logger.error("Missing nickname from request!");
+                return res.status(NOT_FOUND).json({error: "Missing nickname from request!"});
+            }
+            if (!songs || !songs.length) {
+                logger.error("Missing song list from request!");
+                return res.status(NOT_FOUND).json({error: "Missing song list from request!"});
+            }
 
             this.user = await User.findOne({name: name});
 
