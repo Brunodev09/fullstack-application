@@ -28,4 +28,4 @@ for (let i = 0; i < 100; i++) {
 
 test('gives list of top5 songs and a list of users and expects a list of classified users', () => {
     expect(Rank.rank(list, top)).toHaveLength(list.length);
-})
+});
