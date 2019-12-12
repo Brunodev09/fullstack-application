@@ -15,9 +15,9 @@ try {
 
             logger.info(`Worker "${deadWorker.process.pid}" encerrado - Motivo: ${signal} - Código: ${code}. Inicializando novo worker de PID "${worker.process.pid}"`);
         });
+
         return;
     }
-
 
     const Server = require("./app");
     const SubmitController = require("./controllers/submit");
