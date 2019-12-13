@@ -11,18 +11,36 @@ const Rank = require("../classes/Rank");
 const { INTERNAL_ERROR, SUCCESS, BAD } = CODES;
 const { INTERNAL_SERVER_ERROR, NO_USER } = ERRORS;
 
-module.exports = class AdminController {
 
+/** AdminController is the class that handles the processing of users and votes. */
+module.exports = class AdminController {
+     /**
+     * Instantiates routes primary path and Express Router.
+     */
     constructor() {
         this.path = '/admin';
         this.router = express.Router();
         this.init();
     }
 
+    /**
+     * Instantiates the process route.
+     */
     init() {
         this.router.get(this.path, this.process);
     }
 
+    /**
+     * Process the entire user collection, selects TOP5 list accordingly to frequency of votes. Also returns a user list regarding
+     * contribution. Contribution points are earned by matching one or more songs that are associated with an user
+     *  with one or more songs that are contained by the TOP5 list. 
+     * Edge case for an empty query.
+     * 
+     * @async
+     * @param {req} req - Express request object.
+     * @param {res} res - Express response object.
+     * @return {Promise<res>} Express response object.
+     */
     process = async (req, res) => {
         try {
             const songTotal = 100;
@@ -55,7 +73,7 @@ module.exports = class AdminController {
         } catch (e) {
             logger.error(e.message || e);
             logger.error(__filename);
-            res.status(INTERNAL_ERROR).send(INTERNAL_SERVER_ERROR);
+            return res.status(INTERNAL_ERROR).send(INTERNAL_SERVER_ERROR);
         }
     };
 

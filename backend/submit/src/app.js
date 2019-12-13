@@ -7,7 +7,23 @@ const cors = require("cors");
 const Ddos = require('ddos');
 let ddos = new Ddos({burst: 10, limit: 15});
 
+/** The Server class is responsible for initializing the Express framework, the Mongoose and MongoDB drivers, 
+ * all the middlewares and all of the controllers as well. 
+ 
+ * In this particular service, there is a DDoS middleware in use to control the number and frequency of requests to the service.
+ * 
+ * The MVC/MC pattern allows a pretty decent scalability of controllers with zero code on this class and a one liner
+ * on the applications entry file (index.js). Also unifies MongoDB connections, making the use of models really quick
+ * by discarding the necessity to establish a new connection at every import of each model. 
+ * 
+ * Also responsible for shutting the service down if anything goes wrong. 
+ */
+
 module.exports = class Server {
+    /**
+     * Instantiates express callbacks, database, middlewares and controllers.
+     * @param {Controller} Controller object
+     */
     constructor(controllers) {
         this.app = express();
         this.DB();
@@ -15,24 +31,39 @@ module.exports = class Server {
         this.initControllers(controllers);
 
     }
-
+    /**
+     * Listens in the desired port.
+     *
+     * @method
+     * @listens {Request} Express http request.
+     */   
     listen() {
         this.app.listen(process.env.PORT || 5000, () => logger.info(`Submit service has been started!`));
     }
-
+    /**
+     * Initializes middlewares: DDoS protection module, cors and body parsers.
+     * @method
+     */ 
     initMiddlewares() {
         this.app.use(ddos.express);
         this.app.use(cors());
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended: true}));
     }
-
+    /**
+     * Loop through and initializes all controllers of the application.
+     * @method
+     */ 
     initControllers(controllers) {
         for (let controller of controllers) {
             this.app.use("/", controller.router);
         }
     }
-
+     /**
+     * Standard initialization and connection of MongoDB with Mongoose and events listener for exceptions and messages.
+     * @method
+     * @listens {<http>MongoDB} http MongoDB object events
+     */ 
     DB() {
         try {
             this.connection = mongoose.connect(process.env.MONGO_ACCESS, {

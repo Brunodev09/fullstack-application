@@ -2,6 +2,7 @@ const SongMapper = require('./SongMapper');
 
 let list = [];
 let chars = ["a", "b", "c", "d", "e", "f", "i", "o", "u"];
+let usersFavoriteSongsNumber = 5;
 
 function makeName(n) {
     let str = "";
@@ -13,7 +14,7 @@ function makeName(n) {
 
 function makeList() {
     let l = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < usersFavoriteSongsNumber - 1; i++) {
         if (Math.floor(Math.random() * 10) % 2 === 0) l.push(chars[i]);
         else l.push("RANDOM_ID");
     }
@@ -21,13 +22,12 @@ function makeList() {
 }
 
 for (let i = 0; i < 100; i++) {
-    list.push({ name: makeName(Math.floor(Math.random() * 8)), songs: makeList() });
+    list.push({ name: makeName(8), songs: makeList() });
 }
 
 let m = new SongMapper(list);
 m.map();
-console.log(JSON.stringify(m))
 
-// test('Receives a list of users and returns a map of the most voted songs.', () => {
-//     expect(Object.keys(m)).toHaveLength(list.length);
-// });
+test('Receives a list of users and returns a map of the most voted songs.', () => {
+    expect(Object.keys(m._)).toHaveLength(usersFavoriteSongsNumber);
+});

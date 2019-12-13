@@ -1,3 +1,5 @@
+/** @module winston */
+/** Used for a prettier and more centralized log system. */
 const winston = require('winston');
 
 const logger = winston.createLogger({
