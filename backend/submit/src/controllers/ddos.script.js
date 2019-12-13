@@ -1,7 +1,8 @@
-// Execute this file with node with the Submit service running to perfome a staged DDoS attack on the Submit service
+// Execute this file with Node.js, with the Submit service running to perfom a staged DDoS attack on the Submit service
 // and watch it being prevented.
 const axios = require('axios');
 const t = 1; // Interval before next request in ms.
+const servicePort = 5000;
 let counter = 0; // Request counter.
 let req; // To-be-Request object.
 
@@ -11,8 +12,8 @@ let req; // To-be-Request object.
 (() => {
     setInterval(async () => {
         try {
-            console.log(`Request number ${counter} brute force request, again in ${t}`);
-            req = await axios.post('http://localhost:5000/user', {});
+            console.log(`Brute force request number ${counter}, again in ${t}...`);
+            req = await axios.post(`http://localhost:${servicePort}/user`, {});
             console.log(req);
             counter++;
         } catch (e) {
