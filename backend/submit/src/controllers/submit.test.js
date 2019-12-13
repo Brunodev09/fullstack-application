@@ -1,4 +1,5 @@
 const request = require("supertest");
+const json = require("../../spotify-top100-2018");
 
 for (let i = 0; i < 100; i++) {
     describe('POST /user', function () {
@@ -7,7 +8,11 @@ for (let i = 0; i < 100; i++) {
                 .post('/user')
                 .send({
                     name: 'testUser' + i,
-                    songs: ["52oa213n12bnb321c", "52oa213n12bnb321d", "52oa213n12bnb321c", "52oa213n12bnb321c", "52oa213n12bnb321c"]
+                    songs: [
+                        json[Math.floor(Math.random() * 99) + 1].id, json[Math.floor(Math.random() * 99) + 1].id,
+                        json[Math.floor(Math.random() * 99) + 1].id, json[Math.floor(Math.random() * 99) + 1].id,
+                        json[Math.floor(Math.random() * 99) + 1].id
+                    ]
                 })
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
