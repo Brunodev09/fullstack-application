@@ -1,4 +1,7 @@
 let mongoose, { Schema, model } = require("mongoose");
+/**
+ * Standard initialization of Mongoose Models to use it as documents inside MongoDB.
+ */
 
 const User = new Schema({
     name: {

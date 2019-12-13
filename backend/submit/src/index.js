@@ -1,4 +1,6 @@
-const { resolve } = require("path");
+/** @author Bruno Mayol Giannotti - Fullstack application template. */
+
+ const { resolve } = require("path");
 const { config } = require("dotenv");
 const cluster = require("cluster");
 const logger = require("./tools/logger");

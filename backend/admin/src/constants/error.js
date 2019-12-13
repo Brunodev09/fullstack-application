@@ -6,4 +6,4 @@ module.exports = {
  */
     NO_USER: "NO_USER",
     INTERNAL_SERVER_ERROR: "INTERNAL_SERVER_ERROR"
-}
+};

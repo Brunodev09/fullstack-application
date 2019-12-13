@@ -20,7 +20,7 @@ const cors = require("cors");
 module.exports = class Server {
     /**
      * Instantiates express callbacks, database, middlewares and controllers.
-     * @param {Controller} Controller object
+     * @param controllers
      */
     constructor(controllers) {
         this.app = express();

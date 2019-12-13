@@ -1,6 +1,10 @@
 const request = require("supertest");
 const json = require("../../spotify-top100-2018");
 
+/*Testing the /user route and its functionality by creating 100 users with randomized characters nicknames with
+each user having 5 random selected songs from the activity JSON (refer to spotify-top100-2018) represented by their id.*/
+
+
 for (let i = 0; i < 100; i++) {
     describe('POST /user', function () {
         it('responds with json', function (done) {

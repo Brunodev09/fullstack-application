@@ -1,5 +1,8 @@
 const Top = require('./Top');
 
+/* Testing the Top class, delivering a map indexed by random ids and valued by quantity of votes and expecting
+* a return of a list with the 5 most voted ids/songs. */
+
 let chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c'];
 let map = {};
 

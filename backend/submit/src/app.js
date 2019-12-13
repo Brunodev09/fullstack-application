@@ -1,4 +1,3 @@
-const cluster = require("cluster");
 const express = require("express");
 const mongoose = require("mongoose");
 const {join} = require("path");
@@ -22,7 +21,7 @@ let ddos = new Ddos({burst: 10, limit: 15});
 module.exports = class Server {
     /**
      * Instantiates express callbacks, database, middlewares and controllers.
-     * @param {Controller} Controller object
+     * @param controllers
      */
     constructor(controllers) {
         this.app = express();

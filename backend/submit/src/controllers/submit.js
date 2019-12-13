@@ -9,7 +9,6 @@ const mongoose = require("mongoose");
 const { INTERNAL_ERROR, NOT_FOUND, SUCCESS, BAD } = CODES;
 const { MISSING_NICKNAME, MISSING_SONG_LIST, LIST_OVERFLOW, ALREADY_EXISTS, INTERNAL_SERVER_ERROR } = ERRORS;
 
-// @FINISHED - Document the ENTIRE code explaining (tests included) what each function and classes does and why.
 // @TODO - Missing documentation on classes and all the tests of the admin flow.
 // @TODO - Don't forget a very detailed README (Microservices architecture and MVC pattern (Scalability of controllers)).
 // @TODO - Also remember to quote that we're not only dockerizing the services but also clustering their ports.

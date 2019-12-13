@@ -1,4 +1,7 @@
 const SongMapper = require('./SongMapper');
+/* Testing the SongMapper class by giving it an array of random user objects and expecting a map indexed by unique song
+ * ids and valued by the number of times it has been voted. */
+
 
 let list = [];
 let chars = ["a", "b", "c", "d", "e", "f", "i", "o", "u"];

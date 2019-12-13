@@ -1,4 +1,6 @@
 const Rank = require('./Rank');
+/* Testing the Rank class by sending a list of user objects and a string list of length 5 representing the top 5 most
+  * voted songs and expects a list of users modified with the new property "points". */
 
 let top = ["5ac98fas98sad79", "5bc98fas98sad79", "5bb98fas98sad79", "5tt98fas98sad79", "5zz98fas98sad79"];
 let list = [];
