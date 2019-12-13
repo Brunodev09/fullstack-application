@@ -9,13 +9,7 @@ const mongoose = require("mongoose");
 const { INTERNAL_ERROR, NOT_FOUND, SUCCESS, BAD } = CODES;
 const { MISSING_NICKNAME, MISSING_SONG_LIST, LIST_OVERFLOW, ALREADY_EXISTS, INTERNAL_SERVER_ERROR } = ERRORS;
 
-// @TODO - Missing documentation on classes and all the tests of the admin flow.
 // @TODO - Don't forget a very detailed README (Microservices architecture and MVC pattern (Scalability of controllers)).
-// @TODO - Also remember to quote that we're not only dockerizing the services but also clustering their ports.
-// @TODO - Remember to note why I chose to map songs through ID, so I'd use less processing in the API's since the interfaces
-// will need to parse the JSON anyway to be able to display each name of song. So we're parsing it only once. 
-// @FINISHED - Jest all the classes and make a test to prove that we're DDoS free on this particular service.
-// @TODO - Test of DDoS.
 
 /** UserController is the class that handles all of the user submission regarding votes on songs and all user related flows. */
 module.exports = class UserController {
