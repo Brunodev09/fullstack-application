@@ -9,7 +9,7 @@ import StarIcon from '@material-ui/icons/Star';
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
-        maxWidth: 560,
+        maxWidth: 760,
         backgroundColor: theme.palette.background.paper
     },
 }));
