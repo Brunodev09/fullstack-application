@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Table from "../Table/Table";
 import { httpAdmin as http } from "../../utils/Http";
+import Sleep from "../../utils/Sleep";
 import { toast } from "react-toastify";
 
 
@@ -21,6 +22,9 @@ class Admin extends Component {
 	}
 
 	async componentDidMount() {
+		this.props.setLoading(true);
+		await Sleep.run(2000);
+		this.props.setLoading(false);
 		try {
 			let req = await http.get("/admin");
 			if (req) {

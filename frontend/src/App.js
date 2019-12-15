@@ -3,6 +3,7 @@ import Header from "./components/Header/Header";
 import Admin from "./components/Admin/Admin";
 import Loader from "./components/Loader/Loader";
 import Form from "./components/Form/Form";
+import Reference from "./components/Reference/Reference";
 
 import { createBrowserHistory } from 'history';
 
@@ -15,9 +16,6 @@ import JSONFile from "./spotify-top100-2018.json";
 // @TODO - Implement virtualized table to be able to render up more than 200 users on the table.
 // @TODO - Take pictures of the interfaces to attach on README.
 // @TODO - Document the code and Jest it.
-// @TODO - Dockerize frontend.
-// @TODO - Make reference screen list.
-
 
 let arr = JSONFile;
 arr = arr.map(k => {
@@ -44,7 +42,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-
+			loading: false
 		}
 
 	}
@@ -58,6 +56,9 @@ class App extends Component {
 	componentDidMount() {
 	}
 
+	setLoading = (bool) => {
+		this.setState({"loading": bool});
+	} 
 
 	render() {
 		return (
@@ -65,12 +66,12 @@ class App extends Component {
 				<div className="customHeader">
 					<Header history={this.history} search={this.search} onClickNav={this.onClickNav} />
 				</div>
-				<Loader loading={false} />
+				<Loader loading={this.state.loading} />
 				<ToastContainer pauseOnHover={false} pauseOnFocusLoss={false} />
-
 				<Switch>
-					<Route render={() => <Form arr={arr} />} exact path="/" />
-					<Route render={() => <Admin arr={arr} />} exact path="/admin" />
+					<Route render={() => <Form setLoading={this.setLoading} arr={arr} />} exact path="/" />
+					<Route render={() => <Admin setLoading={this.setLoading} arr={arr} />} exact path="/admin" />
+					<Route render={() => <Reference arr={arr} />} exact path="/references" />
 				</Switch>
 			</Router>
 

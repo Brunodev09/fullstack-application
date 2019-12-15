@@ -18,20 +18,22 @@ code {
 }
 
 .makeStyles-btn1-116 {
-  /* background: rgb(250, 250, 250) !important; */
   background: #ede6e6 !important;
 }
 .MuiTypography-colorTextSecondary {
-  /* background: rgb(250, 250, 250) !important; */
   background: #ede6e6 !important;
 
 }
 
 .MuiCardContent-root:last-child {
   background: #ede6e6 !important;
-  /* background: rgb(250, 250, 250) !important; */
 }
 
 .makeStyles-card-114 {
   background: #ede6e6 !important;
+}
+
+
+.MuiCircularProgress-colorSecondary {
+  color: #1bd75f !important;
 }

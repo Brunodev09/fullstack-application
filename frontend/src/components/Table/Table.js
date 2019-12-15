@@ -14,12 +14,6 @@ const useStyles = makeStyles({
     },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-let rows = [];
-
 const arrayToMap = (array) => {
     let _m = {};
     for (let item of array) {

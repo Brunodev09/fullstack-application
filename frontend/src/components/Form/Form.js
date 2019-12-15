@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import InputCard from '../Input/Input';
 import { toast } from "react-toastify";
 import { httpSubmit as http } from "../../utils/Http";
+import Sleep from "../../utils/Sleep";
 import './form.css';
 
 
@@ -75,17 +76,33 @@ class Form extends Component {
         if (errorMin) return toast.error("Please select at least 5 songs.");
         else if (errorSame) return toast.error("Please choose 5 DIFFERENT songs!");
 
+        this.props.setLoading(true);
+        let req;
+
         try {
-            let req = await http.post("/user", { name, songs: arr });
+            req = await http.post("/user", { name, songs: arr });
             if ((req.status + "")[0] === "2") toast.success("Your form has been sent! Thanks for participating!");
             else toast.error(req.statusText);
         } catch (e) {
             console.error(e);
             toast.error(e.message || e.statusText || e);
         }
-        setTimeout(() => {
-            window.location.reload();
-        }, 2000);
+
+        await Sleep.run(1000, (p) => {
+            const testValidity = !!p;
+            return testValidity;
+        }, req);
+
+        this.props.setLoading(false);
+        return window.location.reload();
+    }
+
+    promiseTimeout = (ms) => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve();
+            }, ms);
+        });
     }
 
 
