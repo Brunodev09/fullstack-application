@@ -73,10 +73,10 @@ const useStyles = makeStyles(theme => ({
     list: {
         width: 250,
         color: '#1bd75f',
-        backgroundColor: '#1a1414'
+        // backgroundColor: '#1a1414'
     },
     customList: {
-        backgroundColor: '#1a1414'
+        // backgroundColor: '#1a1414'
     }
 }));
 
@@ -92,6 +92,7 @@ function NavbarC(props) {
     };
 
     const handleClick = event => {
+        console.log(props)
         props.history.push(event);
     };
 

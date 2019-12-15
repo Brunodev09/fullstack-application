@@ -70,5 +70,6 @@ class Http {
 }
 
 export const httpSubmit = new Http('http://localhost:5001', {});
+export const httpAdmin = new Http('http://localhost:5000', {});
 
 // module.exports = httpUser;

@@ -1,25 +1,9 @@
 import React, { Component } from 'react';
 
 import InputCard from '../Input/Input';
-import Message from '../../utils/Message';
 import { toast } from "react-toastify";
 import { httpSubmit as http } from "../../utils/Http";
 import './form.css';
-
-import JSONFile from "../../spotify-top100-2018.json";
-
-let arr = JSONFile;
-arr = arr.map(k => {
-    if (k.name && k.id) {
-        return { name: k.name.toString(), id: k.id }
-    }
-});
-
-arr.sort((a, b) => {
-    if (a.name < b.name) return -1;
-    if (a.name > b.name) return 1;
-    return 0;
-})
 
 
 class Form extends Component {
@@ -100,7 +84,7 @@ class Form extends Component {
             toast.error(e.message || e.statusText || e);
         }
         setTimeout(() => {
-            // window.location.reload();
+            window.location.reload();
         }, 2000);
     }
 
@@ -109,15 +93,16 @@ class Form extends Component {
         return (
             <div className='loginCard'>
                 <InputCard
+                    arr={this.props.arr}
                     title="Submit your nickname and 5 favorite songs from the sorted selectors list of tracks."
                     fields={
                         [
                             { element: "input", label: "Enter your nickname", func: this.handleUser, type: "text" },
-                            { element: "selector", label: "Pick the 1st song:", selector: true, items: arr, func: this.selector1 },
-                            { element: "selector", label: "Pick the 2st song:", selector: true, items: arr, func: this.selector2 },
-                            { element: "selector", label: "Pick the 3st song:", selector: true, items: arr, func: this.selector3 },
-                            { element: "selector", label: "Pick the 4st song:", selector: true, items: arr, func: this.selector4 },
-                            { element: "selector", label: "Pick the 5st song:", selector: true, items: arr, func: this.selector5 },
+                            { element: "selector", label: "Pick the 1st song:", selector: true, func: this.selector1 },
+                            { element: "selector", label: "Pick the 2st song:", selector: true, func: this.selector2 },
+                            { element: "selector", label: "Pick the 3st song:", selector: true, func: this.selector3 },
+                            { element: "selector", label: "Pick the 4st song:", selector: true, func: this.selector4 },
+                            { element: "selector", label: "Pick the 5st song:", selector: true, func: this.selector5 },
                             { element: "button", label: "Submit", func: this.handleSubmit }
                         ]
                     }

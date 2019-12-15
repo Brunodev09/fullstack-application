@@ -115,11 +115,13 @@ const CssTextField = withStyles({
     },
 })(TextField);
 
+
 export default function InputCard(props) {
     const classes = useStyles();
     //   let { post } = props;
     const [user, setUser] = useState(null);
     const [password, setPassword] = useState(null);
+    const arr = props.arr;
 
     return (
         <Card className={classes.card}>
@@ -183,7 +185,7 @@ export default function InputCard(props) {
                                                     onChange={(evt) => k.func(evt.target.value)}
                                                     // input={<CustomInput />}
                                                 >
-                                                    {k.items.map(item => (
+                                                    {arr.map(item => (
                                                         <MenuItem value={item.id}>{item.name}</MenuItem>
                                                     ))}
                                                 </Select>
