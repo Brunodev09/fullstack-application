@@ -1,0 +1,33 @@
+version: "3"
+services:
+    mongo:
+        container_name: mongo
+        image: "mongo:latest"
+        ports:
+            - "27017:27017"
+        volumes:
+            - /data/mongodb/db:/data/db
+    web_admin:
+        container_name: admin
+        build:
+            context: ../backend/admin
+        ports:
+            - "5000:5000"
+        environment:
+            - PORT=5000
+            - CORES=2
+            - MONGO_ACCESS=mongodb://mongo/cit
+        links:
+            - mongo
+    web_submit:
+        container_name: submit
+        build:
+            context: ../backend/submit
+        ports:
+            - "5001:5001"
+        environment:
+            - PORT=5001
+            - CORES=2
+            - MONGO_ACCESS=mongodb://mongo/cit
+        links:
+            - mongo
