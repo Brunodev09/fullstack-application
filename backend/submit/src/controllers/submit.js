@@ -64,8 +64,8 @@ module.exports = class UserController {
             if (this.user) return res.status(BAD).json({errors: ALREADY_EXISTS});
 
             this.user = new User({name, songs});
-
-            const query = await this.user.save();
+            
+            await this.user.save();
 
             return res.status(SUCCESS).json({status: SUCCESS});
 

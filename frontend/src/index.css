@@ -5,9 +5,33 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #1a1414 !important;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.MuiDrawer-paper {
+  background: #1a1414 !important;
+}
+
+.makeStyles-btn1-116 {
+  /* background: rgb(250, 250, 250) !important; */
+  background: #ede6e6 !important;
+}
+.MuiTypography-colorTextSecondary {
+  /* background: rgb(250, 250, 250) !important; */
+  background: #ede6e6 !important;
+
+}
+
+.MuiCardContent-root:last-child {
+  background: #ede6e6 !important;
+  /* background: rgb(250, 250, 250) !important; */
+}
+
+.makeStyles-card-114 {
+  background: #ede6e6 !important;
 }

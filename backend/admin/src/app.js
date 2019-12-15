@@ -69,8 +69,6 @@ module.exports = class Server {
 
 	DB() {
 		try {
-			logger.info("teste " + JSON.stringify(process.env));
-			logger.info("teste2 " + process.env.MONGO_ACCESS);
 			this.connection = mongoose.connect(process.env.MONGO_ACCESS, {
 				useNewUrlParser: true,
 				useCreateIndex: true,
@@ -95,7 +93,7 @@ module.exports = class Server {
 		});
 
 		process.on("SIGINT", () => {
-			mongoose.connection.close(function() {
+			mongoose.connection.close(function () {
 				logger.info(
 					"Mongoose default connection disconnected through app termination"
 				);

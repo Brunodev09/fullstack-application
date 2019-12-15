@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import './App.css';
 import Header from "./components/Header/Header";
+import Admin from "./components/Admin/Admin";
+import Submit from "./components/Submit/Submit";
+import Loader from "./components/Loader/Loader";
+import Form from "./components/Form/Form";
+
+import { createBrowserHistory } from 'history';
 
 import { ToastContainer, toast } from "react-toastify";
-import { Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import './App.css';
 
 class App extends Component {
 
@@ -15,6 +21,8 @@ class App extends Component {
 
 	}
 
+	history = createBrowserHistory();
+
 	componentWillReceiveProps(next) {
 
 	}
@@ -22,21 +30,21 @@ class App extends Component {
 	componentDidMount() {
 	}
 
-// history={this.props.history}
+
 	render() {
 		return (
-			<Router >
+			<BrowserRouter >
 				<div className="customHeader">
-					<Header search={this.search} user={this.state.user} onClickNav={this.onClickNav} />
+					<Header history={this.history} search={this.search} onClickNav={this.onClickNav} />
 				</div>
-				{/* <Loader /> */}
+				<Loader loading={false} />	
 				<ToastContainer pauseOnHover={false} pauseOnFocusLoss={false} />
 
-				{/* <Switch>
-					<Route component={Submit} exact path="/" />
+				<Switch>
+					<Route component={Form} exact path="/" />
 					<Route component={Admin} exact path="/admin" />
-				</Switch> */}
-			</Router>
+				</Switch>
+			</BrowserRouter>
 
 		);
 	}

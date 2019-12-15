@@ -24,7 +24,9 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         display: 'none',
         [theme.breakpoints.up('sm')]: {
-            display: 'block'
+            display: 'block',
+            textAlign: 'center',
+            color: '#1bd75f'
         }
     },
     search: {
@@ -64,11 +66,17 @@ const useStyles = makeStyles(theme => ({
             }
         }
     },
+    
     appBar: {
-        background: '#7347ed'
+        background: '#1a1414'
     },
     list: {
-        width: 250
+        width: 250,
+        color: '#1bd75f',
+        backgroundColor: '#1a1414'
+    },
+    customList: {
+        backgroundColor: '#1a1414'
     }
 }));
 
@@ -77,14 +85,14 @@ function NavbarC(props) {
     const materialClasses = useStyles();
     const [drawer, setDrawer] = useState(false);
 
-    let items = [{ link: '/', label: 'Posts' }];
+    let items = [{ link: '/', label: 'Submit' }, { link: '/admin', label: 'Admin'}, {link: '/references', label: 'References'}];
 
     const handleSearch = (char) => {
         props.search(char);
     };
 
     const handleClick = event => {
-        props.onClickNav(event);
+        props.history.push(event);
     };
 
     const sideList = () => (
@@ -93,16 +101,13 @@ function NavbarC(props) {
             role='presentation'
             onClick={() => setDrawer(false)}
         >
-            <List>
+            <List >
                 {items.map(text => (
                     <ListItem
                         onClick={() => handleClick(text.link)}
                         button
                         key={text.label}
                     >
-                        {/* <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon> */}
                         <ListItemText primary={text.label} />
                     </ListItem>
                 ))}
@@ -116,7 +121,7 @@ function NavbarC(props) {
                 {sideList()}
             </Drawer>
             <AppBar className={materialClasses.appBar} position='static'>
-                <Toolbar>
+                <Toolbar >
                     <IconButton
                         edge='start'
                         className={materialClasses.menuButton}
@@ -131,29 +136,8 @@ function NavbarC(props) {
                         variant='h6'
                         noWrap
                     >
-                        Teste do Integrador
+                        Radio Top 5
                     </Typography>
-                    {props.user && props.user.token ? <Typography
-                        variant='h6'
-                        noWrap
-                        >
-                        Logged as {props.user.userName}
-                    </Typography> : null}
-                    <div className={materialClasses.search}>
-                        <div className={materialClasses.searchIcon}>
-                            <SearchIcon />
-                        </div>
-                        <InputBase
-                            placeholder='Search…'
-                            classes={{
-                                root: materialClasses.inputRoot,
-                                input: materialClasses.inputInput
-                            }}
-                            inputProps={{ 'aria-label': 'search' }}
-                            onChange={(evt) => handleSearch(evt.target.value)}
-                        />
-                        
-                    </div>
                 </Toolbar>
             </AppBar>
         </Fragment>

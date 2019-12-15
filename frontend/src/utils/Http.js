@@ -38,12 +38,13 @@ class Http {
 							new Options(method, body, this.defaultHeaders)
 						)
 					);
+					if (req && (req.status + "")[0] !== "2") reject(req);
 					const parsed = await req.json();
 					console.log(parsed);
 					if (parsed) resolve(parsed);
 				} catch (e) {
 					console.error(e);
-					throw e;
+					reject(e);
 				}
 			});
 		} catch (error) {
@@ -68,6 +69,6 @@ class Http {
 	}
 }
 
-export const httpUser = new Http('http://localhost:5000', {});
+export const httpSubmit = new Http('http://localhost:5001', {});
 
 // module.exports = httpUser;
