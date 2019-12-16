@@ -33,7 +33,7 @@ export default function CustomList(props) {
             <List component="nav" className={classes.root} aria-label={label}>
                 {props.list.map((k, i) => (
                     i === 0 ? <div>
-                        <ListItem onClick={() => handleClick(k.link)} button>
+                        <ListItem button>
                         <ListItemText style={{ textAlign: 'center' }} primary={label} />
                     </ListItem>
                         <ListItem onClick={() => handleClick(k.link)} button>

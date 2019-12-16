@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const { join } = require("path");
 const logger = require("./tools/logger");
 const cors = require("cors");
+let ddos = new Ddos({burst: 10, limit: 15});
+
 
 /** The Server class is responsible for initializing the Express framework, the Mongoose and MongoDB drivers,
  * all the middlewares and all of the controllers as well.
@@ -45,6 +47,7 @@ module.exports = class Server {
 	 */
 
 	initMiddlewares() {
+        this.app.use(ddos.express);
 		this.app.use(cors());
 		this.app.use(express.json());
 		this.app.use(express.urlencoded({ extended: true }));

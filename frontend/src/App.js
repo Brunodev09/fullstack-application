@@ -13,7 +13,6 @@ import './App.css';
 
 import JSONFile from "./spotify-top100-2018.json";
 
-// @TODO - Implement virtualized table to be able to render up more than 200 users on the table.
 // @TODO - Take pictures of the interfaces to attach on README.
 // @TODO - Document the code and Jest it.
 

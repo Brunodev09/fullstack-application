@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Table from "../Table/Table";
+import VirtualTable from "../VirtualTable/VirtualTable";
 import { httpAdmin as http } from "../../utils/Http";
 import Sleep from "../../utils/Sleep";
 import { toast } from "react-toastify";
@@ -40,7 +41,10 @@ class Admin extends Component {
 
 	render() {
 		return (
-			<div><Table rows2={this.state.users} rows={this.state.rows} arr={this.props.arr} /></div>
+			<div>
+				<Table rows={this.state.rows} arr={this.props.arr} />
+				<VirtualTable rows={this.state.users} />
+			</div>
 		);
 	}
 }

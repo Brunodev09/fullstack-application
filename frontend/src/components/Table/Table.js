@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
@@ -25,9 +26,6 @@ const arrayToMap = (array) => {
 export default function SimpleTable(props) {
     let arr = props.arr;
     let map = arrayToMap(arr);
-
-    let rows2 = [...props.rows2];
-    rows2.sort((a,b) => b.points - a.points);
 
     const classes = useStyles();
 
@@ -52,48 +50,27 @@ export default function SimpleTable(props) {
                     </TableHead>
                     <TableBody>
                         {props.rows.map((row, i) => (
-                            <TableRow >
-                                <TableCell >{i+1}</TableCell>
-                                <TableCell >{map[row].name}</TableCell>
-                                <TableCell >{map[row].artist}</TableCell>
-                                <TableCell >{((map[row].duration / 1000)).toFixed(0)}</TableCell>
-                                <TableCell >{map[row].genre}</TableCell>
-                                <TableCell >{((map[row].dance * 100).toFixed(0) + "%")}</TableCell>
-                            </TableRow>
+                            i === 0 ?
+                                <TableRow style={{backgroundColor:'#1bd75f'}} >
+                                    <TableCell >{i + 1}</TableCell>
+                                    <TableCell >{map[row].name}</TableCell>
+                                    <TableCell >{map[row].artist}</TableCell>
+                                    <TableCell >{((map[row].duration / 1000)).toFixed(0)}</TableCell>
+                                    <TableCell >{map[row].genre}</TableCell>
+                                    <TableCell >{((map[row].dance * 100).toFixed(0) + "%")}</TableCell>
+                                </TableRow> :
+                                <TableRow >
+                                    <TableCell >{i + 1}</TableCell>
+                                    <TableCell >{map[row].name}</TableCell>
+                                    <TableCell >{map[row].artist}</TableCell>
+                                    <TableCell >{((map[row].duration / 1000)).toFixed(0)}</TableCell>
+                                    <TableCell >{map[row].genre}</TableCell>
+                                    <TableCell >{((map[row].dance * 100).toFixed(0) + "%")}</TableCell>
+                                </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
-
-            <div style={{marginTop: "5%"}}>
-                <TableContainer component={Paper}>
-                    <Table className={classes.table} aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                {/* {props.cols.map((k, i) => (
-                            <div>
-                                {i === 0 ? <TableCell>{k}</TableCell> : <TableCell align="right">{k}</TableCell>}
-                            </div>
-                        ))} */}
-                                <TableCell>Position</TableCell>
-                                <TableCell >Nickname</TableCell>
-                                <TableCell >Contribution</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows2.map((row, i) => (
-                                <TableRow >
-                                    <TableCell component="th" scope="row">
-                                        {i+1}
-                                    </TableCell>
-                                    <TableCell >{row.nickname}</TableCell>
-                                    <TableCell >{row.points}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </div>
 
         </div>
     );
