@@ -139,18 +139,21 @@ MuiVirtualizedTable.propTypes = {
 
 const VirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
 
-let rows = [];
 /**
  * My implementation of the VirtualizedTable from MaterialUI. Responsible for tabulating the user list from the Admin API.
  * This virtualized table is highly performatic and can render hundreds of rows with no performance issues.
  */
 export default function ReactVirtualizedTable(props) {
 
+  let rows = [];
+
 
   for (let item of props.rows) {
     rows.push(item);
   }
   rows.sort((a, b) => b.points - a.points);
+
+  console.log(rows, 'teste')
 
   return (
     <Paper style={{ height: 400, width: '20%', marginLeft: 'auto', marginRight: 'auto', marginTop: '5%' }}>
