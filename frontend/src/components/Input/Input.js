@@ -115,7 +115,10 @@ const CssTextField = withStyles({
     },
 })(TextField);
 
-
+/**
+ * My customization of the InputCard from MaterialUI. Responsible for generating the whole form dynamically. It respects the type:
+ * { element: <string>, label: <string>, func: <function>, type: <string> }
+ */
 export default function InputCard(props) {
     const classes = useStyles();
     //   let { post } = props;

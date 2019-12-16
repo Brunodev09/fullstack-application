@@ -12,30 +12,18 @@ import { Router, Switch, Route } from "react-router-dom";
 import './App.css';
 
 import JSONFile from "./spotify-top100-2018.json";
+import SongParser from "./utils/SongParser";
 
-// @TODO - Take pictures of the interfaces to attach on README.
-// @TODO - Document the code and Jest it.
+const arr = (new SongParser(JSONFile)).parsed;
 
-let arr = JSONFile;
-arr = arr.map(k => {
-	if (k.name && k.id) {
-		return {
-			name: k.name.toString(), 
-			id: k.id,
-			artist: k.artists,
-			genre: k.genre,
-			duration: k.duration_ms,
-			dance: k.danceability
-		}
-	}
-});
-
-arr.sort((a, b) => {
-	if (a.name < b.name) return -1;
-	if (a.name > b.name) return 1;
-	return 0;
-})
-
+/**
+ * Entry point of the frontend application and responsible for instantiating all React components, 
+ * including Router and history. Also where I read, parse and sort the JSON file to distribute to the responsible components.
+ * 
+ * In structure, I tried to use Class-Based-Components for Components that I felt the need of easy-consistency of class context
+ * or the reference of the "window". Style-based rendering from MaterialUI were not converted to CBC, instead they remained as
+ * Functional-Components since their logic was very simples and could be easily solved with React Hooks.
+ */
 class App extends Component {
 
 	constructor(props) {
@@ -47,10 +35,6 @@ class App extends Component {
 	}
 
 	history = createBrowserHistory();
-
-	componentWillReceiveProps(next) {
-
-	}
 
 	componentDidMount() {
 	}

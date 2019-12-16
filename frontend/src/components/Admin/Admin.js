@@ -5,7 +5,9 @@ import { httpAdmin as http } from "../../utils/Http";
 import Sleep from "../../utils/Sleep";
 import { toast } from "react-toastify";
 
-
+/**
+ * This component is responsible for consuming the Admin service and displaying it to the use in custom Tables.  
+ */
 class Admin extends Component {
 
 	constructor(props) {

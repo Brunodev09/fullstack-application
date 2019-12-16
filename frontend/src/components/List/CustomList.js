@@ -14,6 +14,10 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+/**
+ * My customization of the List component from MaterialUI. Responsible for generating lists dynamically. 
+ * It respects the type: { link: <string>, comment: <string> }
+ */
 export default function CustomList(props) {
     const classes = useStyles();
     let list = props.list;

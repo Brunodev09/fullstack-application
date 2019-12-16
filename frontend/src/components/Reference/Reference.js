@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import CustomList from '../List/CustomList';
 
+/**
+ * This component is responsible for displaying in a table all the useful links I have used to complete this challenge.
+ */
 class Reference extends Component {
 
     constructor(props) {

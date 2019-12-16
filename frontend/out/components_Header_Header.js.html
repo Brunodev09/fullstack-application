@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Header/Header.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Header/Header.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Fragment, useState } from 'react';
+import {
+    AppBar,
+    Toolbar,
+    IconButton,
+    Typography,
+    InputBase,
+    Drawer,
+    List,
+    ListItem,
+    ListItemText
+} from '@material-ui/core';
+import { fade, makeStyles } from '@material-ui/core/styles';
+import { Menu as MenuIcon, Search as SearchIcon } from '@material-ui/icons';
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        flexGrow: 1
+    },
+    menuButton: {
+        marginRight: theme.spacing(2)
+    },
+    title: {
+        flexGrow: 1,
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+            display: 'block',
+            textAlign: 'center',
+            color: '#1bd75f'
+        }
+    },
+    search: {
+        position: 'relative',
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: fade(theme.palette.common.white, 0.15),
+        '&amp;:hover': {
+            backgroundColor: fade(theme.palette.common.white, 0.25)
+        },
+        marginLeft: 0,
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            marginLeft: theme.spacing(1),
+            width: 'auto'
+        }
+    },
+    searchIcon: {
+        width: theme.spacing(7),
+        height: '100%',
+        position: 'absolute',
+        pointerEvents: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    inputRoot: {
+        color: 'inherit'
+    },
+    inputInput: {
+        padding: theme.spacing(1, 1, 1, 7),
+        transition: theme.transitions.create('width'),
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            width: 120,
+            '&amp;:focus': {
+                width: 200
+            }
+        }
+    },
+    
+    appBar: {
+        background: '#1a1414'
+    },
+    list: {
+        width: 250,
+        color: '#1bd75f',
+        // backgroundColor: '#1a1414'
+    },
+    customList: {
+        // backgroundColor: '#1a1414'
+    }
+}));
+
+/**
+ * My customization of the Navbar from MaterialUI. Responsible for triggering a change of page.
+ */
+function NavbarC(props) {
+    const materialClasses = useStyles();
+    const [drawer, setDrawer] = useState(false);
+
+    let items = [{ link: '/', label: 'Submit' }, { link: '/admin', label: 'Admin'}, {link: '/references', label: 'References'}];
+
+    const handleSearch = (char) => {
+        props.search(char);
+    };
+
+    const handleClick = event => {
+        props.history.push(event);
+    };
+
+    const sideList = () => (
+        &lt;div
+            className={materialClasses.list}
+            role='presentation'
+            onClick={() => setDrawer(false)}
+        >
+            &lt;List >
+                {items.map(text => (
+                    &lt;ListItem
+                        onClick={() => handleClick(text.link)}
+                        button
+                        key={text.label}
+                    >
+                        &lt;ListItemText primary={text.label} />
+                    &lt;/ListItem>
+                ))}
+            &lt;/List>
+        &lt;/div>
+    );
+
+    return (
+        &lt;Fragment>
+            &lt;Drawer open={drawer} onClose={() => setDrawer(false)}>
+                {sideList()}
+            &lt;/Drawer>
+            &lt;AppBar className={materialClasses.appBar} position='static'>
+                &lt;Toolbar >
+                    &lt;IconButton
+                        edge='start'
+                        className={materialClasses.menuButton}
+                        color='inherit'
+                        aria-label='open drawer'
+                        onClick={() => setDrawer(true)}
+                    >
+                        &lt;MenuIcon />
+                    &lt;/IconButton>
+                    &lt;Typography
+                        className={materialClasses.title}
+                        variant='h6'
+                        noWrap
+                    >
+                        Radio Top 5
+                    &lt;/Typography>
+                &lt;/Toolbar>
+            &lt;/AppBar>
+        &lt;/Fragment>
+    );
+}
+
+
+export default NavbarC;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Form.html">Form</a></li><li><a href="Http.html">Http</a></li><li><a href="Loader.html">Loader</a></li><li><a href="module.html#.exports">exports</a></li><li><a href="Reference.html">Reference</a></li></ul><h3>Global</h3><ul><li><a href="global.html#httpSubmit">httpSubmit</a></li><li><a href="global.html#NavbarC">NavbarC</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Mon Dec 16 2019 01:50:51 GMT-0300 (GMT-03:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

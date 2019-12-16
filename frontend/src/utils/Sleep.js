@@ -1,3 +1,11 @@
+/**
+ * Responsible for making an asynchronous timeout and with the option to execute a function (possibly async) after the timeout
+ * and resolve the promise according to this callback. 
+ * @param {number} ms
+ * @param {function} func
+ * @param {any} func arguments to execute
+ * @returns {Promise}
+ */
 export default class Sleep {
     static async run(ms, func, ...args) {
         let __exec = undefined;

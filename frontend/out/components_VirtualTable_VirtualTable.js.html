@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/VirtualTable/VirtualTable.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/VirtualTable/VirtualTable.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import { withStyles } from '@material-ui/core/styles';
+import TableCell from '@material-ui/core/TableCell';
+import Paper from '@material-ui/core/Paper';
+import { AutoSizer, Column, Table } from 'react-virtualized';
+
+const styles = theme => ({
+  flexContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    boxSizing: 'border-box',
+  },
+  table: {
+    '&amp; .ReactVirtualized__Table__headerRow': {
+      flip: false,
+      paddingRight: theme.direction === 'rtl' ? '0px !important' : undefined,
+    },
+  },
+  tableRow: {
+    cursor: 'pointer',
+  },
+  tableRowHover: {
+    '&amp;:hover': {
+      backgroundColor: theme.palette.grey[200],
+    },
+  },
+  tableCell: {
+    flex: 1,
+  },
+  noClick: {
+    cursor: 'initial',
+  },
+});
+
+class MuiVirtualizedTable extends React.PureComponent {
+  static defaultProps = {
+    headerHeight: 48,
+    rowHeight: 48
+  };
+
+  getRowClassName = ({ index }) => {
+    const { classes, onRowClick } = this.props;
+
+    return clsx(classes.tableRow, classes.flexContainer, {
+      [classes.tableRowHover]: index !== -1 &amp;&amp; onRowClick != null,
+    });
+  };
+
+  cellRenderer = ({ cellData, columnIndex }) => {
+    const { columns, classes, rowHeight, onRowClick } = this.props;
+    return (
+      &lt;TableCell
+        component="div"
+        className={clsx(classes.tableCell, classes.flexContainer, {
+          [classes.noClick]: onRowClick == null,
+        })}
+        variant="body"
+        style={{ height: rowHeight }}
+        align={(columnIndex != null &amp;&amp; columns[columnIndex].numeric) || false ? 'right' : 'left'}
+      >
+        {cellData}
+      &lt;/TableCell>
+    );
+  };
+
+  headerRenderer = ({ label, columnIndex }) => {
+    const { headerHeight, columns, classes } = this.props;
+
+    return (
+      &lt;TableCell
+        component="div"
+        className={clsx(classes.tableCell, classes.flexContainer, classes.noClick)}
+        variant="head"
+        style={{ height: headerHeight }}
+        align={columns[columnIndex].numeric || false ? 'right' : 'left'}
+      >
+        &lt;span>{label}&lt;/span>
+      &lt;/TableCell>
+    );
+  };
+
+  render() {
+    const { classes, columns, rowHeight, headerHeight, ...tableProps } = this.props;
+    return (
+      &lt;AutoSizer>
+        {({ height, width }) => (
+          &lt;Table
+            height={height}
+            width={width}
+            rowHeight={rowHeight}
+            gridStyle={{
+              direction: 'inherit',
+            }}
+            headerHeight={headerHeight}
+            className={classes.table}
+            {...tableProps}
+            rowClassName={this.getRowClassName}
+          >
+            {columns.map(({ dataKey, ...other }, index) => {
+              return (
+                &lt;Column
+                  key={dataKey}
+                  headerRenderer={headerProps =>
+                    this.headerRenderer({
+                      ...headerProps,
+                      columnIndex: index,
+                    })
+                  }
+                  className={classes.flexContainer}
+                  cellRenderer={this.cellRenderer}
+                  dataKey={dataKey}
+                  {...other}
+                />
+              );
+            })}
+          &lt;/Table>
+        )}
+      &lt;/AutoSizer>
+    );
+  }
+}
+
+MuiVirtualizedTable.propTypes = {
+  classes: PropTypes.object.isRequired,
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      dataKey: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      numeric: PropTypes.bool,
+      width: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
+  headerHeight: PropTypes.number,
+  onRowClick: PropTypes.func,
+  rowHeight: PropTypes.number,
+};
+
+const VirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
+
+let rows = [];
+/**
+ * My implementation of the VirtualizedTable from MaterialUI. Responsible for tabulating the user list from the Admin API.
+ * This virtualized table is highly performatic and can render hundreds of rows with no performance issues.
+ */
+export default function ReactVirtualizedTable(props) {
+
+
+  for (let item of props.rows) {
+    rows.push(item);
+  }
+  rows.sort((a, b) => b.points - a.points);
+
+  return (
+    &lt;Paper style={{ height: 400, width: '20%', marginLeft: 'auto', marginRight: 'auto', marginTop: '5%' }}>
+      &lt;VirtualizedTable
+        rowCount={rows.length}
+        rowGetter={({ index }) => rows[index]}
+        columns={[
+          {
+            width: 200,
+            label: 'Nickname',
+            dataKey: 'nickname',
+          },
+          {
+            width: 120,
+            label: 'Points',
+            dataKey: 'points',
+            numeric: true,
+          }
+        ]}
+      />
+    &lt;/Paper>
+  );
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Form.html">Form</a></li><li><a href="Http.html">Http</a></li><li><a href="Loader.html">Loader</a></li><li><a href="module.html#.exports">exports</a></li><li><a href="Reference.html">Reference</a></li></ul><h3>Global</h3><ul><li><a href="global.html#httpSubmit">httpSubmit</a></li><li><a href="global.html#NavbarC">NavbarC</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Mon Dec 16 2019 01:50:51 GMT-0300 (GMT-03:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

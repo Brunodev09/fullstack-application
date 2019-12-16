@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Table/Table.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Table/Table.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+
+const useStyles = makeStyles({
+    table: {
+        minWidth: 650,
+    },
+});
+
+const arrayToMap = (array) => {
+    let _m = {};
+    for (let item of array) {
+        if (!_m[item.id]) _m[item.id] = item;
+    }
+    return _m;
+}
+
+/**
+ * My custom take on a MaterialUI table component. Sadly there's an issue with the &lt;TableHead> and I could not render dynamic
+ * information on it, but everything else was fine. Responsible for tabulating the top5 information received from the Admin service.
+ */
+
+export default function SimpleTable(props) {
+    let arr = props.arr;
+    let map = arrayToMap(arr);
+
+    const classes = useStyles();
+
+    return (
+        &lt;div>
+            &lt;TableContainer component={Paper}>
+                &lt;Table className={classes.table} aria-label="simple table">
+                    &lt;TableHead>
+                        &lt;TableRow>
+                            {/* {props.cols.map((k, i) => (
+                            &lt;div>
+                                {i === 0 ? &lt;TableCell>{k}&lt;/TableCell> : &lt;TableCell align="right">{k}&lt;/TableCell>}
+                            &lt;/div>
+                        ))} */}
+                            &lt;TableCell>Position&lt;/TableCell>
+                            &lt;TableCell >Track&lt;/TableCell>
+                            &lt;TableCell >Artist&lt;/TableCell>
+                            &lt;TableCell >Duration(s)&lt;/TableCell>
+                            &lt;TableCell >Genre&lt;/TableCell>
+                            &lt;TableCell >Danceability&lt;/TableCell>
+                        &lt;/TableRow>
+                    &lt;/TableHead>
+                    &lt;TableBody>
+                        {props.rows.map((row, i) => (
+                            i === 0 ?
+                                &lt;TableRow style={{backgroundColor:'#1bd75f'}} >
+                                    &lt;TableCell >{i + 1}&lt;/TableCell>
+                                    &lt;TableCell >{map[row].name}&lt;/TableCell>
+                                    &lt;TableCell >{map[row].artist}&lt;/TableCell>
+                                    &lt;TableCell >{((map[row].duration / 1000)).toFixed(0)}&lt;/TableCell>
+                                    &lt;TableCell >{map[row].genre}&lt;/TableCell>
+                                    &lt;TableCell >{((map[row].dance * 100).toFixed(0) + "%")}&lt;/TableCell>
+                                &lt;/TableRow> :
+                                &lt;TableRow >
+                                    &lt;TableCell >{i + 1}&lt;/TableCell>
+                                    &lt;TableCell >{map[row].name}&lt;/TableCell>
+                                    &lt;TableCell >{map[row].artist}&lt;/TableCell>
+                                    &lt;TableCell >{((map[row].duration / 1000)).toFixed(0)}&lt;/TableCell>
+                                    &lt;TableCell >{map[row].genre}&lt;/TableCell>
+                                    &lt;TableCell >{((map[row].dance * 100).toFixed(0) + "%")}&lt;/TableCell>
+                                &lt;/TableRow>
+                        ))}
+                    &lt;/TableBody>
+                &lt;/Table>
+            &lt;/TableContainer>
+
+        &lt;/div>
+    );
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Form.html">Form</a></li><li><a href="Http.html">Http</a></li><li><a href="Loader.html">Loader</a></li><li><a href="module.html#.exports">exports</a></li><li><a href="Reference.html">Reference</a></li></ul><h3>Global</h3><ul><li><a href="global.html#httpSubmit">httpSubmit</a></li><li><a href="global.html#NavbarC">NavbarC</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Mon Dec 16 2019 01:50:51 GMT-0300 (GMT-03:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

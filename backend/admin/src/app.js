@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const { join } = require("path");
 const logger = require("./tools/logger");
 const cors = require("cors");
+const Ddos = require('ddos');
 let ddos = new Ddos({burst: 10, limit: 15});
 
 

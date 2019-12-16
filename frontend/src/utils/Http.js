@@ -1,6 +1,5 @@
-import request from 'request-promise';
-// const request = require("request-promise");
 
+export 
 class Options {
 	constructor(method, body, headers) {
 		this.method = method;
@@ -10,6 +9,11 @@ class Options {
 	}
 }
 
+/**
+ * Lightweight Http class to make requests and point to services. GET, POST, PUT and DELETE.
+ * @param {string} host
+ * @returns {object} { key: value } Object literal for mandatory headers.
+ */
 class Http {
 	constructor(host, defaultHeaders) {
 		this.host = host;
@@ -69,7 +73,9 @@ class Http {
 	}
 }
 
+/**
+ * Singleton instances to point to each service.
+ */
 export const httpSubmit = new Http('http://localhost:5001', {});
 export const httpAdmin = new Http('http://localhost:5000', {});
 
-// module.exports = httpUser;

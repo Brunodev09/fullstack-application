@@ -80,7 +80,9 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-
+/**
+ * My customization of the Navbar from MaterialUI. Responsible for triggering a change of page.
+ */
 function NavbarC(props) {
     const materialClasses = useStyles();
     const [drawer, setDrawer] = useState(false);
@@ -92,7 +94,6 @@ function NavbarC(props) {
     };
 
     const handleClick = event => {
-        console.log(props)
         props.history.push(event);
     };
 

@@ -6,7 +6,10 @@ import { httpSubmit as http } from "../../utils/Http";
 import Sleep from "../../utils/Sleep";
 import './form.css';
 
-
+/**
+ * Component responsible for rendering the form for input in the Submit interface, sending this formData to the Submit service
+ *  for processing.
+ */
 class Form extends Component {
     constructor(props) {
         super(props);
@@ -95,14 +98,6 @@ class Form extends Component {
 
         this.props.setLoading(false);
         return window.location.reload();
-    }
-
-    promiseTimeout = (ms) => {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve();
-            }, ms);
-        });
     }
 
 

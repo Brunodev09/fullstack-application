@@ -23,6 +23,11 @@ const arrayToMap = (array) => {
     return _m;
 }
 
+/**
+ * My custom take on a MaterialUI table component. Sadly there's an issue with the <TableHead> and I could not render dynamic
+ * information on it, but everything else was fine. Responsible for tabulating the top5 information received from the Admin service.
+ */
+
 export default function SimpleTable(props) {
     let arr = props.arr;
     let map = arrayToMap(arr);

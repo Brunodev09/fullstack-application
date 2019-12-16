@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Input/Input.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Input/Input.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from 'react';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Icon from '@material-ui/core/Icon';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import InputBase from '@material-ui/core/InputBase';
+
+
+const CustomInput = withStyles(theme => ({
+    root: {
+        'label + &amp;': {
+            marginTop: theme.spacing(3),
+        },
+    },
+    input: {
+        borderRadius: 4,
+        position: 'relative',
+        backgroundColor: theme.palette.background.paper,
+        border: '1px solid #1bd75f',
+        fontSize: 16,
+        padding: '10px 26px 10px 12px',
+        transition: theme.transitions.create(['border-color', 'box-shadow']),
+        fontFamily: [
+            '-apple-system',
+            'BlinkMacSystemFont',
+            '"Segoe UI"',
+            'Roboto',
+            '"Helvetica Neue"',
+            'Arial',
+            'sans-serif',
+            '"Apple Color Emoji"',
+            '"Segoe UI Emoji"',
+            '"Segoe UI Symbol"',
+        ].join(','),
+        '&amp;:focus': {
+            borderRadius: 4,
+            borderColor: '#1bd75f',
+            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)'
+        },
+        '&amp;:before': {
+            borderColor: '#1bd75f',
+            color: '#1bd75f'
+
+        },
+        '&amp;:after': {
+            borderColor: '#1bd75f',
+            color: '#1bd75f'
+        }
+    },
+}))(InputBase);
+
+
+const useStyles = makeStyles(theme => ({
+    card: {
+        maxWidth: 545,
+        maxHeight: 645,
+        minHeight: 250,
+        width: '100%',
+        height: '54%'
+    },
+    media: {
+        height: 540
+    },
+    btn1: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap'
+    },
+    textField: {
+        // marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 320
+    },
+    button: {
+        backgroundColor: '#1bd75f',
+        width: '100%',
+        marginTop: '5%',
+        marginBottom: '10%'
+    }
+}));
+
+const CssTextField = withStyles({
+    root: {
+        '&amp; label.Mui-focused': {
+            color: '#1bd75f',
+        },
+        '&amp; .MuiInput-underline:after': {
+            borderBottomColor: '#1bd75f',
+        },
+        '&amp; .MuiOutlinedInput-root': {
+            // '&amp; fieldset': {
+            //   borderColor: 'red',
+            // },
+            // '&amp;:hover fieldset': {
+            //   borderColor: 'yellow',
+            // },
+            '&amp;.Mui-focused fieldset': {
+                borderColor: '#1bd75f',
+            },
+        },
+    },
+})(TextField);
+
+/**
+ * My customization of the InputCard from MaterialUI. Responsible for generating the whole form dynamically. It respects the type:
+ * { element: &lt;string>, label: &lt;string>, func: &lt;function>, type: &lt;string> }
+ */
+export default function InputCard(props) {
+    const classes = useStyles();
+    //   let { post } = props;
+    const [user, setUser] = useState(null);
+    const [password, setPassword] = useState(null);
+    const arr = props.arr;
+
+    return (
+        &lt;Card className={classes.card}>
+            &lt;CardActionArea>
+
+                &lt;div>
+                    {
+                        props.title ? &lt;CardContent>
+                            &lt;Typography
+                                style={{ textAlign: 'center', fontSize: '18px' }}
+                                variant='body2'
+                                color='textSecondary'
+                                component='h1'>
+                                {props.title}
+                            &lt;/Typography>
+                        &lt;/CardContent> : null
+                    }
+                &lt;/div>
+            &lt;/CardActionArea>
+            &lt;CardActions className={classes.btn1}>
+                &lt;div
+                    style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        flexDirection: 'column'
+                    }}
+                >
+                    {props.fields.map(k => (
+                        &lt;div>
+                            {
+                                k.element === "input" ?
+                                    &lt;CssTextField
+                                        id='outlined-basic'
+                                        className={classes.textField}
+                                        label={k.label}
+                                        margin='normal'
+                                        variant='outlined'
+                                        type={k.type}
+                                        onChange={(evt) => k.func(evt.target.value)}
+
+                                    /> : k.element === "button" ?
+                                        &lt;Button
+                                            variant='contained'
+                                            color='#1bd75f'
+                                            startIcon={&lt;Icon>{k.icon}&lt;/Icon>}
+                                            type='submit'
+                                            className={classes.button}
+                                            color='primary'
+                                            onClick={() => k.func()}
+                                        >
+                                            {k.label}
+                                        &lt;/Button> : k.element === "selector" ?
+                                            &lt;FormControl style={{ width: '100%' }}>
+                                                &lt;InputLabel id='demo-simple-select-label'>
+                                                    {k.label}
+                                                &lt;/InputLabel>
+                                                &lt;Select
+                                                    labelId='demo-simple-select-label'
+                                                    id='demo-simple-select'
+                                                    // value={this.state.category}
+                                                    onChange={(evt) => k.func(evt.target.value)}
+                                                    // input={&lt;CustomInput />}
+                                                >
+                                                    {arr.map(item => (
+                                                        &lt;MenuItem value={item.id}>{item.name}&lt;/MenuItem>
+                                                    ))}
+                                                &lt;/Select>
+                                            &lt;/FormControl> : null
+                            }
+
+                            {
+                                // (() => props.fields.map(k => console.log(k.label &amp;&amp; !k.button, k)))()
+                            }
+
+                        &lt;/div>
+                    ))}
+
+
+                &lt;/div>
+            &lt;/CardActions>
+        &lt;/Card>
+    );
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Form.html">Form</a></li><li><a href="Http.html">Http</a></li><li><a href="Loader.html">Loader</a></li><li><a href="module.html#.exports">exports</a></li><li><a href="Reference.html">Reference</a></li></ul><h3>Global</h3><ul><li><a href="global.html#httpSubmit">httpSubmit</a></li><li><a href="global.html#NavbarC">NavbarC</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Mon Dec 16 2019 01:50:51 GMT-0300 (GMT-03:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

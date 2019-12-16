@@ -3,6 +3,10 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import "./loader.css";
 
+
+/**
+ * This component is responsible for controlling the loader and backdrop animation to block user input in async processes.
+ */
 class Loader extends Component {
 
     constructor(props) {

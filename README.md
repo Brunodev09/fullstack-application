@@ -45,6 +45,7 @@
  (When this was created: docker v18.09.7 and docker-compose v1.21.0).
 
 ```shell
+$ cd /docker
 $ sudo docker-compose up
 ```
 
